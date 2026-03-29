@@ -9,10 +9,126 @@ To implement Ridge, Lasso, and ElasticNet regularization models using polynomial
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. 
-2. 
-3. 
-4. 
+
+1. **Start**
+
+2. **Import Libraries**
+
+   * Import required libraries:
+
+     * `pandas`, `numpy`
+     * `matplotlib`, `seaborn`
+     * `train_test_split`
+     * `Ridge`, `Lasso`, `ElasticNet`
+     * `PolynomialFeatures`, `StandardScaler`, `Pipeline`
+     * Evaluation metrics (`MSE`, `MAE`, `R²`)
+
+3. **Load Dataset**
+
+   * Read dataset `encoded_car_data (1).csv` into a DataFrame
+
+4. **Data Preprocessing**
+
+   * Convert categorical variables into numerical form:
+
+     * Apply one-hot encoding using `pd.get_dummies()`
+
+5. **Define Features and Target**
+
+   * Define input features `X` (all columns except `price`)
+   * Define target variable `y` (`price`)
+
+6. **Feature Scaling**
+
+   * Initialize `StandardScaler`
+   * Scale feature matrix `X`
+   * Reshape and scale target variable `y`
+
+7. **Split Dataset**
+
+   * Split data into:
+
+     * Training set (80%)
+     * Testing set (20%)
+   * Use `random_state = 42`
+
+---
+
+### **Model Setup**
+
+8. **Initialize Models**
+
+   * Define a dictionary of models:
+
+     * Ridge Regression (`alpha = 1.0`)
+     * Lasso Regression (`alpha = 1.0`)
+     * ElasticNet (`alpha = 1.0`, `l1_ratio = 0.5`)
+
+9. **Create Results Storage**
+
+   * Initialize an empty dictionary `results` to store evaluation metrics
+
+---
+
+### **Model Training and Evaluation**
+
+10. **For Each Model in the Dictionary:**
+
+* Create a pipeline consisting of:
+
+  * Polynomial feature transformation (`degree = 2`)
+  * Selected regression model (Ridge/Lasso/ElasticNet)
+
+11. **Train Model**
+
+* Fit pipeline using training data (`X_train`, `y_train`)
+
+12. **Make Predictions**
+
+* Predict values using test data (`X_test`)
+
+13. **Evaluate Model**
+
+* Compute:
+
+  * Mean Squared Error (MSE)
+  * Mean Absolute Error (MAE)
+  * R² Score
+
+14. **Store Results**
+
+* Save metrics in the `results` dictionary for each model
+
+---
+
+### **Display Results**
+
+15. **Print Model Performance**
+
+* Display MSE, MAE, and R² for each model
+
+16. **Convert Results to DataFrame**
+
+* Convert `results` dictionary into a DataFrame
+* Reset index and rename columns for clarity
+
+---
+
+### **Visualization**
+
+17. **Plot Performance Metrics**
+
+* Create bar plots using `seaborn`:
+
+  * Plot 1: Models vs MSE
+  * Plot 2: Models vs R² Score
+* Add titles, labels, and rotate x-axis labels
+
+18. **Adjust Layout and Display Plots**
+
+---
+
+19. **End**
 
 ## Program:
 ```
@@ -33,7 +149,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 data = pd.read_csv("encoded_car_data (1).csv")
 data.head()
-df = pd.get_dummies(data, drop_first=True)
+data = pd.get_dummies(data, drop_first=True)
 
 X = data.drop('price',axis=1)
 y = data['price']
